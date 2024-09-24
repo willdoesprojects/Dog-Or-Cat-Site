@@ -1,1 +1,8 @@
 flask>=2.0.0
+flask_cors
+numpy
+Pillow  # PIL is part of the Pillow package
+joblib
+tensorflow>=2.0.0
+
+gunicorn
