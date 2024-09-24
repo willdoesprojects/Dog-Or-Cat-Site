@@ -11,9 +11,14 @@ from tensorflow import keras
 from tensorflow.keras.models import load_model
 import sys
 import pickle
+from test_model import train_and_save_models
+
 
 app = Flask(__name__)
 CORS(app)
+
+print("Creating Model")
+train_and_save_models()
 
 # Load your pre-trained models
 with open('models/kmeans.pkl', 'rb') as f:
