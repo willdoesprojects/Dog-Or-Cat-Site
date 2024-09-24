@@ -76,8 +76,6 @@ def predict():
                 result2 = 'cat'
 
             
-
-
             return jsonify({'bow': result, 'cnn': result2}), 200
 
         except Exception as e:

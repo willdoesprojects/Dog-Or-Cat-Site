@@ -1,50 +1,32 @@
-import joblib
-from image_processing import compute_hog
-from utils import load_dataset
-from sklearn.metrics import accuracy_score
+from image_processing import load_image, compute_hog
+from model import train_kmeans, train_svm, load_model
+from utils import load_dataset, time_execution
 import numpy as np
-from tqdm import tqdm
-import cv2
-# Step 1: Load the saved models
-kmeans = joblib.load('models/kmeans.pkl')
-classifier = joblib.load('models/classifier.pkl')
+import time
 
-# Step 2: Load the test dataset
-test_dataset = load_dataset('./test_set', img_size=(256, 256))  # Replace with actual test set path
+# Load the data
+start_time = time.perf_counter()
+dataset = load_dataset('./data', img_size=(256, 256))
 
-error = 0
-img_total = 0
-def compute_batch_hog(images_batch):
-    return np.array([compute_hog(image)[1] for image in images_batch])
+# Extract images and labels
+dogs, cats = [], []
+for images_batch, labels_batch in dataset:
+    for image, label in zip(images_batch, labels_batch):
+        if label == 1:
+            dogs.append(image.numpy())
+        else:
+            cats.append(image.numpy())
+            
+time_execution(start_time)
 
-from skimage.feature import hog
+# Compute HOG features
+hog_features = [compute_hog(image)[1] for image in dogs + cats]
 
-def compute_batch_hog2(images_batch):
-    return np.array([hog(
-    image,
-    orientations=9,
-    pixels_per_cell=(8, 8),
-    cells_per_block=(2, 2),
-    visualize=False,
-    channel_axis=-1
-) for image in images_batch])
-
-
-for images_batch, labels_batch in tqdm(test_dataset):
-    images_batch = images_batch.numpy().astype("float")
-    hog_features = compute_batch_hog2(images_batch)
-
-    new_words = kmeans.predict(hog_features)
-    new_bow_vectors = np.zeros((len(images_batch), 1000))
-    
-    for idx, word in enumerate(new_words):
-        new_bow_vectors[idx, word] += 1                         
-    
-        predicted_labels = classifier.predict(new_bow_vectors)
-    
-    error += np.sum(predicted_labels != labels_batch.numpy().flatten())
-    img_total += len(images_batch)
-
-accuracy = (img_total - error) / img_total * 100
-
-print(f"Test Accuracy: {accuracy:.2f}%")
+# Train and Save Models
+kmeans, visual_words = train_kmeans(hog_features)
+bow_vectors = np.zeros((len(hog_features), 1000))
+for i, word in enumerate(visual_words):
+    bow_vectors[i, word] += 1
+labels = [1] * len(dogs) + [0] * len(cats)
+classifier = train_svm(bow_vectors, labels)
+print("done")
