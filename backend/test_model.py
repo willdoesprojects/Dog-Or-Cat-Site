@@ -9,7 +9,6 @@ def train_and_save_models(data_path='./data', img_size=(256, 256), n_clusters=10
     Function to load data, compute HOG features, and train KMeans and SVM models.
     """
     # Load the data
-    start_time = time.perf_counter()
     dataset = load_dataset(data_path, img_size=img_size)
 
     # Extract images and labels

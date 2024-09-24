@@ -1,5 +1,6 @@
 from PIL import Image
 import numpy as np
+from skimage.feature import hog
 
 """ Loads image in as grayscale """
 def load_image(filepath):
@@ -13,7 +14,7 @@ def load_image_color(filepath):
     
 
 """ Self-Defined Function to compute our HoG descriptor """
-def compute_hog(image):
+def compute_hog_default(image):
     #Intializing our initial variables: cells, bins, width
     C = 8
     B = 9
@@ -63,4 +64,12 @@ def compute_hog(image):
     return hog_descriptor, hog_features
 
 
-
+def compute_hog(image):
+    return hog(
+        image,
+        orientations=9,
+        pixels_per_cell=(8, 8),
+        cells_per_block=(2, 2),
+        visualize=False,
+        channel_axis=-1
+    )
