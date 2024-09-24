@@ -4,5 +4,6 @@ numpy
 Pillow  # PIL is part of the Pillow package
 joblib==1.4.2
 tensorflow>=2.0.0
+scikit-learn==1.5.1
 
 gunicorn
