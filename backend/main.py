@@ -15,6 +15,12 @@ import pickle
 app = Flask(__name__)
 CORS(app)
 
+import os
+if os.path.exists('models/kmeans.pkl'):
+    print("kmeans.pkl exists")
+else:
+    print("kmeans.pkl does not exist or is inaccessible")
+
 # Load your pre-trained models
 with open('models/kmeans.pkl', 'rb') as f:
     kmeans = pickle.load(f)
