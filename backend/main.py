@@ -10,15 +10,16 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.models import load_model
 import sys
+import pickle
 
-print(joblib.__version__)
-print(sys.version)
 app = Flask(__name__)
 CORS(app)
 
 # Load your pre-trained models
-kmeans = joblib.load('models/kmeans.pkl')
-classifier = joblib.load('models/classifier.pkl')
+with open('models/kmeans.pkl', 'rb') as f:
+    kmeans = pickle.load(f)
+with open('models/classifier.pkl', 'rb') as f:
+    classifier = pickle.load(f)
 model = load_model('models/dog_cat_classifier.h5')
 
 # Import your compute_hog function
