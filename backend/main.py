@@ -9,7 +9,10 @@ import joblib
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.models import load_model
+import sys
 
+print(joblib.__version__)
+print(sys.version)
 app = Flask(__name__)
 CORS(app)
 
@@ -83,4 +86,4 @@ def predict():
     return jsonify({'error': 'File processing failed'}), 400
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
