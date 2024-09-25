@@ -71,5 +71,4 @@ def compute_hog(image):
         pixels_per_cell=(8, 8),
         cells_per_block=(2, 2),
         visualize=False,
-        channel_axis=-1
     )

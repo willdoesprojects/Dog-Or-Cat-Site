@@ -71,7 +71,7 @@ def predict():
             img_array2 = np.expand_dims(image_array2, axis=0)
 
             # Compute HOG features
-            _, hog_features = compute_hog(image_array)
+            hog_features = compute_hog(image_array)
 
             # Predict visual words
             visual_word = kmeans.predict(hog_features.reshape(1, -1))
@@ -87,13 +87,10 @@ def predict():
             labels = {0: 'cat', 1: 'dog'}
             result = labels.get(predicted_label[0], 'unknown')
 
-            print(img_array2.shape)
 
             predictions = model.predict(img_array2)
             score = predictions[0][0]
             result2 = ""
-
-            print(f"{result} {result2}")
 
             if score > 0.5:
                 result2 = 'dog'
@@ -104,8 +101,8 @@ def predict():
             return jsonify({'bow': result, 'cnn': result2}), 200
 
         except Exception as e:
+            print(e)
             return jsonify({'error': str(e)}), 500
-
     return jsonify({'error': 'File processing failed'}), 400
 
 if __name__ == '__main__':
