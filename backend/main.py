@@ -21,23 +21,23 @@ CORS(app)
 kmeans_id = "1Ba_Tct_5EMvz0I0wKp4BxGNjETUtKlyK"
 classifier_id = "1CWO4DLlIsG2exQ1GAkPv9jFIwLRW9Bvx"
 
-if os.path.exists("models/kmeans.pkl"):
-    print("kmeans.pkl exists!")
-else:
-    print("Downloading kmeans from Google Drive...")
-    download_file_from_google_drive(kmeans_id, "kmeans.pkl")
-    print("Downloaded kmeans")
+# if os.path.exists("models/kmeans.pkl"):
+#     print("kmeans.pkl exists!")
+# else:
+#     print("Downloading kmeans from Google Drive...")
+#     download_file_from_google_drive(kmeans_id, "kmeans.pkl")
+#     print("Downloaded kmeans")
 
-if os.path.exists("models/classifier.pkl"):
-    print("classifier.pkl exists!")
-else:
-    print("Downloading classifier from Google Drive...")
-    download_file_from_google_drive(classifier_id, "classifier.pkl")
-    print("Downloaded classifier")
+# if os.path.exists("models/classifier.pkl"):
+#     print("classifier.pkl exists!")
+# else:
+#     print("Downloading classifier from Google Drive...")
+#     download_file_from_google_drive(classifier_id, "classifier.pkl")
+#     print("Downloaded classifier")
 
 
-kmeans = joblib.load("models/kmeans.pkl")
-classifier = joblib.load("models/classifier.pkl")
+# kmeans = joblib.load("models/kmeans.pkl")
+# classifier = joblib.load("models/classifier.pkl")
 
 print("Success!")
 
@@ -45,6 +45,10 @@ model = load_model('models/dog_cat_classifier.h5')
 
 # Import your compute_hog function
 from image_processing import compute_hog
+
+@app.route('/')
+def index():
+    return "hello world"
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -106,4 +110,4 @@ def predict():
     return jsonify({'error': 'File processing failed'}), 400
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
