@@ -12,6 +12,6 @@ COPY requirements.txt /app/
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY models/ /app/models/
-COPY main.py image_processing.py /app/
+COPY main.py image_processing.py google_drive.py /app/
 
 CMD ["python3", "main.py"]
