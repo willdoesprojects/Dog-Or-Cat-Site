@@ -35,6 +35,8 @@ else:
     download_file_from_google_drive(classifier_id, "classifier.pkl")
     print("Downloaded classifier")
 
+
+test = joblib.load("models/classifier.pkl")
 # # Load your pre-trained models
 # with open('models/kmeans.pkl', 'rb') as f:
 #     kmeans = pickle.load(f)
