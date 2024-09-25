@@ -35,9 +35,12 @@ with open('models/kmeans.pkl', 'rb') as f:
     kmeans = pickle.load(f)
 with open('models/classifier.pkl', 'rb') as f:
     classifier = pickle.load(f)
-model = load_model('models/dog_cat_classifier.h5')
 
 print("Success!")
+
+model = load_model('models/dog_cat_classifier.h5')
+
+
 
 # Import your compute_hog function
 from image_processing import compute_hog
