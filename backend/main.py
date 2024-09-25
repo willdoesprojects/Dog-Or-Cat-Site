@@ -37,6 +37,8 @@ with open('models/classifier.pkl', 'rb') as f:
     classifier = pickle.load(f)
 model = load_model('models/dog_cat_classifier.h5')
 
+print("Success!")
+
 # Import your compute_hog function
 from image_processing import compute_hog
 
