@@ -110,4 +110,4 @@ def predict():
     return jsonify({'error': 'File processing failed'}), 400
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
