@@ -36,7 +36,8 @@ else:
     print("Downloaded classifier")
 
 
-test = joblib.load("models/classifier.pkl")
+kmeans = joblib.load("models/kmeans.pkl")
+classifier = joblib.load("models/classifier.pkl")
 # # Load your pre-trained models
 # with open('models/kmeans.pkl', 'rb') as f:
 #     kmeans = pickle.load(f)
