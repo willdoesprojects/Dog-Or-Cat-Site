@@ -38,17 +38,10 @@ else:
 
 kmeans = joblib.load("models/kmeans.pkl")
 classifier = joblib.load("models/classifier.pkl")
-# # Load your pre-trained models
-# with open('models/kmeans.pkl', 'rb') as f:
-#     kmeans = pickle.load(f)
-# with open('models/classifier.pkl', 'rb') as f:
-    # classifier = pickle.load(f)
 
 print("Success!")
 
 model = load_model('models/dog_cat_classifier.h5')
-
-
 
 # Import your compute_hog function
 from image_processing import compute_hog
