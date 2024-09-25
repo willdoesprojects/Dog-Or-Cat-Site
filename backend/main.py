@@ -21,19 +21,19 @@ CORS(app)
 kmeans_id = "1Ba_Tct_5EMvz0I0wKp4BxGNjETUtKlyK"
 classifier_id = "1CWO4DLlIsG2exQ1GAkPv9jFIwLRW9Bvx"
 
-# if os.path.exists("models/kmeans.pkl"):
-#     print("kmeans.pkl exists!")
-# else:
-#     print("Downloading kmeans from Google Drive...")
-#     download_file_from_google_drive(kmeans_id, "kmeans.pkl")
-#     print("Downloaded kmeans")
+if os.path.exists("models/kmeans.pkl"):
+    print("kmeans.pkl exists!")
+else:
+    print("Downloading kmeans from Google Drive...")
+    download_file_from_google_drive(kmeans_id, "kmeans.pkl")
+    print("Downloaded kmeans")
 
-# if os.path.exists("models/classifier.pkl"):
-#     print("classifier.pkl exists!")
-# else:
-#     print("Downloading classifier from Google Drive...")
-#     download_file_from_google_drive(classifier_id, "classifier.pkl")
-#     print("Downloaded classifier")
+if os.path.exists("models/classifier.pkl"):
+    print("classifier.pkl exists!")
+else:
+    print("Downloading classifier from Google Drive...")
+    download_file_from_google_drive(classifier_id, "classifier.pkl")
+    print("Downloaded classifier")
 
 # # Load your pre-trained models
 # with open('models/kmeans.pkl', 'rb') as f:
