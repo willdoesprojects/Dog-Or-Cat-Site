@@ -11,15 +11,24 @@ from tensorflow import keras
 from tensorflow.keras.models import load_model
 import sys
 import pickle
+from google_drive import download_file_from_google_drive
+import joblib
 
 app = Flask(__name__)
 CORS(app)
 
-import os
-if os.path.exists('models/kmeans.pkl'):
-    print("kmeans.pkl exists")
-else:
-    print("kmeans.pkl does not exist or is inaccessible")
+kmeans_id = "1Ba_Tct_5EMvz0I0wKp4BxGNjETUtKlyK"
+classifier_id = "1CWO4DLlIsG2exQ1GAkPv9jFIwLRW9Bvx"
+
+print("Downloading kmeans from Google Drive...")
+download_file_from_google_drive(kmeans_id, "kmeans.pkl")
+print("Downloaded kmeans")
+
+print("Downloading classifier from Google Drive...")
+download_file_from_google_drive(classifier_id, "classifier.pkl")
+print("Downloaded classifier")
+
+test = joblib.load('models/classifier.pkl')
 
 # Load your pre-trained models
 with open('models/kmeans.pkl', 'rb') as f:
