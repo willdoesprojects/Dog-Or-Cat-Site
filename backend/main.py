@@ -39,7 +39,7 @@ classifier_id = "1CWO4DLlIsG2exQ1GAkPv9jFIwLRW9Bvx"
 # with open('models/kmeans.pkl', 'rb') as f:
 #     kmeans = pickle.load(f)
 # with open('models/classifier.pkl', 'rb') as f:
-    classifier = pickle.load(f)
+    # classifier = pickle.load(f)
 
 print("Success!")
 
