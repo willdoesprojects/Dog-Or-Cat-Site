@@ -8,6 +8,7 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  darkMode: "class",
   variants: {
     extend: {
       opacity: ["group", "group-hover"],

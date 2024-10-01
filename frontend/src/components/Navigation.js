@@ -3,28 +3,34 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from './logo.png';
+import logo2 from './logo.webp'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMoon } from '@fortawesome/free-solid-svg-icons';
+import { faSun } from '@fortawesome/free-solid-svg-icons';
+import useLocalStorage from 'use-local-storage';
 
 function Navigation() {
-    // State to track the theme mode
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useLocalStorage("darkMode", false);
 
     const toggleTheme = () => {
+        localStorage.setItem('dark', darkMode)
         setDarkMode(!darkMode);
+        // onThemeToggle(!darkMode);s
     };
 
     return (
         <Navbar 
             expand="lg" 
-            className={darkMode ? "bg-dark navbar-dark" : "bg-light navbar-light"}
+            className= {darkMode ? "bg-dark navbar-dark" : "bg-light navbar-light"}
         >
             <Container>
                 <Navbar.Brand href="/">
                     <img
                         alt="logo"
-                        src={logo}
+                        src={darkMode ? logo2 : logo }
                         width="45"
                         height="45"
-                        className="d-inline-block align-top"
+                        className="d-inline-block align-top rounded-full"
                     />{' '}
                     PetID
                 </Navbar.Brand>
@@ -35,12 +41,12 @@ function Navigation() {
                         <Nav.Link href="/aboutme">About Me</Nav.Link>
                         <Nav.Link href="/implementation">Implementation</Nav.Link>
                     </Nav>
-                    {/* Add a button to toggle between night and daylight */}
+
                     <button
                         onClick={toggleTheme}
                         className="btn btn-outline-secondary"
                     >
-                        {darkMode ? "Switch to Daylight" : "Switch to Night"}
+                        {darkMode ? (<FontAwesomeIcon icon={faSun} />) : (<FontAwesomeIcon icon={faMoon} />)}
                     </button>
                 </Navbar.Collapse>
             </Container>
